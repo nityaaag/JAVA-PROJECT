@@ -1,0 +1,56 @@
+# Gradle
+.gradle/
+build/
+*.jar
+*.war
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+*.class
+
+# Maven (if using Maven)
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.backup
+pom.xml.rej
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# OS specific files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Spring Boot
+application-local.properties
+application-dev.properties
+application-prod.properties
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+
+# Node modules (if any frontend builds)
+node_modules/
+npm-debug.log
+
+# Database
+*.db
+*.sqlite
+
+# Temporary files
+*.tmp
+*.bak

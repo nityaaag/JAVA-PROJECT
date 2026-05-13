@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Rooms - Lodgings Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🏨 Lodging Management</h1>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/rooms">Manage Rooms</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>🛏️ Room Management</h1>
+            <p class="subtitle">View, edit, and manage all hotel rooms</p>
+        </div>
+
+        <!-- Add Room Button -->
+        <div class="action-buttons">
+            <a href="/rooms/add" class="btn btn-success">➕ Add New Room</a>
+        </div>
+
+        <!-- Rooms Table -->
+        <div class="table-container">
+            <!-- If no rooms exist, show this message -->
+            <div th:if="${rooms.isEmpty()}" class="no-data">
+                <p>No rooms found in the system. Click "Add New Room" to create one.</p>
+            </div>
+
+            <!-- Display table if rooms exist -->
+            <table th:if="${!rooms.isEmpty()}" class="table">
+                <thead>
+                    <tr>
+                        <th>Room ID</th>
+                        <th>Room Number</th>
+                        <th>Room Type</th>
+                        <th>Price (₹)</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through each room and display in table row -->
+                    <tr th:each="room : ${rooms}">
+                        <!-- Display Room ID -->
+                        <td th:text="${room.id}"></td>
+                        
+                        <!-- Display Room Number -->
+                        <td th:text="${room.roomNumber}"></td>
+                        
+                        <!-- Display Room Type -->
+                        <td th:text="${room.roomType}"></td>
+                        
+                        <!-- Display Price -->
+                        <td th:text="'₹' + ${#numbers.formatInteger(room.price, 1, 'COMMA')}"></td>
+                        
+                        <!-- Display Status with color coding -->
+                        <td>
+                            <span class="status-badge" 
+                                  th:classappend="${room.status == 'Available' ? 'status-available' : (room.status == 'Occupied' ? 'status-occupied' : 'status-maintenance')}"
+                                  th:text="${room.status}"></span>
+                        </td>
+                        
+                        <!-- Action Buttons: Edit and Delete -->
+                        <td class="actions">
+                            <!-- Edit Button -->
+                            <a th:href="@{/rooms/edit/{id}(id=${room.id})}" class="btn btn-edit">Edit</a>
+                            
+                            <!-- Delete Button with confirmation -->
+                            <a th:href="@{/rooms/delete/{id}(id=${room.id})}" 
+                               class="btn btn-delete"
+                               onclick="return confirm('Are you sure you want to delete this room?');">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Room Statistics (Optional) -->
+        <div th:if="${!rooms.isEmpty()}" class="stats-section">
+            <div class="stat-card">
+                <h3>Total Rooms</h3>
+                <p th:text="${rooms.size()}" class="stat-value"></p>
+            </div>
+            <div class="stat-card">
+                <h3>Available</h3>
+                <p class="stat-value" th:text="${#lists.size(#lists.select(rooms, t -> t.status == 'Available'))}"></p>
+            </div>
+            <div class="stat-card">
+                <h3>Occupied</h3>
+                <p class="stat-value" th:text="${#lists.size(#lists.select(rooms, t -> t.status == 'Occupied'))}"></p>
+            </div>
+            <div class="stat-card">
+                <h3>Under Maintenance</h3>
+                <p class="stat-value" th:text="${#lists.size(#lists.select(rooms, t -> t.status == 'Under Maintenance'))}"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Lodgings & Restaurant Management System | BCA Project</p>
+    </footer>
+</body>
+</html>

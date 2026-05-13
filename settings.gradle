@@ -1,0 +1,4 @@
+// settings.gradle - Gradle Project Settings File
+// This file defines the project structure and name
+
+rootProject.name = 'lodging-management-system'

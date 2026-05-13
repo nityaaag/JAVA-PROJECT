@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Lodgings & Restaurant Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🏨 Lodging Management</h1>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/rooms">Manage Rooms</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Welcome to Lodgings & Restaurant Management System</h1>
+            <p class="subtitle">A simple and efficient system to manage hotel rooms and restaurant operations</p>
+            
+            <!-- Welcome Card -->
+            <div class="welcome-card">
+                <h2>System Features</h2>
+                <ul class="features-list">
+                    <li>✓ Manage room inventory</li>
+                    <li>✓ Track room availability</li>
+                    <li>✓ Update room pricing</li>
+                    <li>✓ Maintain room status</li>
+                </ul>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <a href="/rooms" class="btn btn-primary">
+                    📋 View All Rooms
+                </a>
+                <a href="/rooms/add" class="btn btn-success">
+                    ➕ Add New Room
+                </a>
+            </div>
+
+            <!-- System Info -->
+            <div class="info-section">
+                <h3>About This System</h3>
+                <p>
+                    This is a beginner-friendly hotel management system built with Spring Boot, 
+                    Thymeleaf, and MySQL. It demonstrates basic CRUD operations for room management.
+                </p>
+                <p class="tech-info">
+                    <strong>Technology Stack:</strong> Java 21 | Spring Boot | Gradle | Thymeleaf | MySQL | Spring Data JPA
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Lodgings & Restaurant Management System | BCA Project</p>
+    </footer>
+</body>
+</html>

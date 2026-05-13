@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Room - Lodgings Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🏨 Lodging Management</h1>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/rooms">Manage Rooms</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1>✏️ Edit Room Details</h1>
+            <p class="subtitle">Update the information for Room ID: <span th:text="${room.id}"></span></p>
+        </div>
+
+        <!-- Edit Room Form -->
+        <div class="form-container">
+            <form th:action="@{/rooms/save}" th:object="${room}" method="POST" class="form">
+                
+                <!-- Room ID (Hidden field - not displayed but sent with form) -->
+                <input type="hidden" th:field="*{id}">
+
+                <!-- Room Number Field (Read-only for existing rooms) -->
+                <div class="form-group">
+                    <label for="roomNumber">Room Number <span class="required">*</span></label>
+                    <input type="text" 
+                           id="roomNumber" 
+                           th:field="*{roomNumber}" 
+                           class="form-control" 
+                           placeholder="e.g., 101, 202, 305" 
+                           required>
+                    <small class="form-text">Room number for identification</small>
+                </div>
+
+                <!-- Room Type Field -->
+                <div class="form-group">
+                    <label for="roomType">Room Type <span class="required">*</span></label>
+                    <select id="roomType" 
+                            th:field="*{roomType}" 
+                            class="form-control" 
+                            required>
+                        <option value="">-- Select Room Type --</option>
+                        <option value="Simple Room">Simple Room</option>
+                        <option value="Deluxe Room">Deluxe Room</option>
+                        <option value="Luxury Room">Luxury Room</option>
+                        <option value="Suite Room">Suite Room</option>
+                        <option value="Lake View Room">Lake View Room</option>
+                    </select>
+                    <small class="form-text">Select the category/type of the room</small>
+                </div>
+
+                <!-- Price Field -->
+                <div class="form-group">
+                    <label for="price">Price (₹) <span class="required">*</span></label>
+                    <input type="number" 
+                           id="price" 
+                           th:field="*{price}" 
+                           class="form-control" 
+                           placeholder="e.g., 5000, 10000" 
+                           step="0.01"
+                           min="0"
+                           required>
+                    <small class="form-text">Nightly rate for the room</small>
+                </div>
+
+                <!-- Status Field -->
+                <div class="form-group">
+                    <label for="status">Status <span class="required">*</span></label>
+                    <select id="status" 
+                            th:field="*{status}" 
+                            class="form-control" 
+                            required>
+                        <option value="">-- Select Status --</option>
+                        <option value="Available">Available</option>
+                        <option value="Occupied">Occupied</option>
+                        <option value="Under Maintenance">Under Maintenance</option>
+                    </select>
+                    <small class="form-text">Current status of the room</small>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <!-- Update Button -->
+                    <button type="submit" class="btn btn-success">💾 Update Room</button>
+                    
+                    <!-- Cancel Button -->
+                    <a href="/rooms" class="btn btn-secondary">❌ Cancel</a>
+                    
+                    <!-- Delete Button -->
+                    <a th:href="@{/rooms/delete/{id}(id=${room.id})}" 
+                       class="btn btn-delete"
+                       onclick="return confirm('Are you sure you want to delete this room? This action cannot be undone.');">🗑️ Delete Room</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Information Box -->
+        <div class="info-box">
+            <h3>📝 Edit Instructions</h3>
+            <ul>
+                <li><strong>Room Number:</strong> Can be modified if needed</li>
+                <li><strong>Room Type:</strong> Change the room category</li>
+                <li><strong>Price:</strong> Update the nightly rate</li>
+                <li><strong>Status:</strong> Update current availability status</li>
+                <li><strong>Delete:</strong> Use the delete button to remove this room permanently</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Lodgings & Restaurant Management System | BCA Project</p>
+    </footer>
+</body>
+</html>
